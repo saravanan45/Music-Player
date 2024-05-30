@@ -227,11 +227,19 @@ const AllSongs = ({navigation}) => {
               <TouchableOpacity
                 onPress={() => playSong(song, index)}
                 style={styles.songClickContainer}>
-                <Image
-                  style={styles.coverImg}
-                  source={{uri: song.cover}}
-                  alt={'cover-image'}
-                />
+                {song.cover ? (
+                  <Image
+                    style={styles.coverImg}
+                    source={{uri: song.cover}}
+                    alt={'cover-image'}
+                  />
+                ) : (
+                  <Icon
+                    style={styles.iconPlaceholderImg}
+                    name="music"
+                    size={15}
+                  />
+                )}
                 <View style={styles.songTextContainer} id="text-container">
                   <Text
                     style={styles.songTitle}
@@ -301,5 +309,12 @@ const styles = StyleSheet.create({
   },
   bannerIcon: {
     color: 'white',
+  },
+  iconPlaceholderImg: {
+    borderColor: 'lightgray',
+    borderWidth: 1,
+    padding: 16,
+    backgroundColor: 'lightgray',
+    borderRadius: 8,
   },
 });
