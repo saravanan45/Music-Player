@@ -55,9 +55,6 @@ const AllSongs = ({navigation}) => {
   useEffect(() => {
     const getAllSongs = async () => {
       const allSongs = await getAll({
-        limit: 20,
-        offset: 0,
-        coverQuality: 50,
         minSongDuration: 1000,
         sortBy: SortSongFields.TITLE,
         sortOrder: SortSongOrder.DESC,
