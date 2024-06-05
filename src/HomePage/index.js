@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import AllSongs from '../AllSongs';

@@ -40,6 +40,7 @@ const AllSongs = ({navigation}) => {
   };
 
   const {
+    currentSong,
     setCurrentPlaylistName,
     setPlaylists,
     playlists,
@@ -55,6 +56,7 @@ const AllSongs = ({navigation}) => {
   useEffect(() => {
     const getAllSongs = async () => {
       const allSongs = await getAll({
+        limit: 3000,
         minSongDuration: 1000,
         sortBy: SortSongFields.TITLE,
         sortOrder: SortSongOrder.DESC,
@@ -101,7 +103,6 @@ const AllSongs = ({navigation}) => {
       storeStringData('currentPlaylistName', 'AllSongs');
       storeStringData('currentSongIndex', index.toString());
     }
-    //console.log('currentSongIndex', songInfo.title, index);
     navigation.navigate('PlayScreen', {song: songInfo});
   };
 
@@ -139,10 +140,8 @@ const AllSongs = ({navigation}) => {
     setShowBanner(true);
   };
 
-  const getPlaylistOptions = useCallback(
-    () => playlistsOptions(playlists, handleAddToPlaylist, songHighlighted),
-    [playlists, handleAddToPlaylist, songHighlighted],
-  );
+  const getPlaylistOptions = () =>
+    playlistsOptions(playlists, handleAddToPlaylist, songHighlighted);
 
   const addToPlaylistDropdownOptions = [
     ...addToPlaylistOptionsHeader(handleCreatePlaylist),
@@ -218,6 +217,7 @@ const AllSongs = ({navigation}) => {
       />
       {Array.isArray(songs) && (
         <FlatList
+          {...(currentSong && {contentContainerStyle: {paddingBottom: 50}})}
           data={songs}
           renderItem={({item: song, index}) => (
             <View style={styles.songListView} key={song.title}>

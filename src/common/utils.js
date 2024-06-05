@@ -42,13 +42,10 @@ export const getCurrentPlaylistSongs = (playlist, currentPlaylist) => {
   if (!playlist?.length) {
     return [];
   }
-  console.log('called', playlist, currentPlaylist);
   const currentPlaylistSongs =
     Array.isArray(playlist) &&
     playlist.filter(list => list.name === currentPlaylist);
 
-  const songslist = currentPlaylistSongs[0].list.map(song => song.title);
-  console.log('called list', songslist);
   return currentPlaylistSongs[0]?.list;
 };
 
@@ -64,7 +61,6 @@ export const checkIfPlaylistExists = (playlist, newPlaylist) => {
 
 export const storeStringData = async (key, value) => {
   try {
-    console.log('store value', value, key);
     await AsyncStorage.setItem(key, value);
   } catch (e) {
     console.error(e);
@@ -74,7 +70,6 @@ export const storeStringData = async (key, value) => {
 export const getStoredStringData = async key => {
   try {
     const value = await AsyncStorage.getItem(key);
-
     return value;
   } catch (e) {
     console.error(e);
@@ -100,7 +95,7 @@ export const getStoredData = async key => {
 };
 
 export const playlistsOptions = (playlists, handleAddToPlaylist, song) => {
-  if (playlists.length > 2) {
+  if (playlists.length < 2) {
     return [];
   }
   const options = playlists.map(pl => {

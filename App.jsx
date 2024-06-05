@@ -258,7 +258,6 @@ const App = () => {
   };
 
   const playNextSong = () => {
-    console.log('playlist', currentPlaylistName);
     const nextIndex =
       currentSongIndex === currentSongsList.length - 1
         ? 0
@@ -328,7 +327,6 @@ const App = () => {
     const newPlaylists = [...playlists, {name: playlistName, list: songs}];
     setPlaylists(newPlaylists);
     storeData('playlists', newPlaylists);
-    console.log('length', newPlaylists.length);
   };
 
   // add a song to playlist

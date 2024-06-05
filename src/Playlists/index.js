@@ -1,5 +1,12 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {Image, View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {
+  FlatList,
+  Image,
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Banner} from 'react-native-paper';
 
@@ -9,8 +16,13 @@ import CustomDropdown from '../CustomDropdown';
 import ConfirmationModal from '../ConfirmationModal';
 
 const Playlists = ({navigation}) => {
-  const {playlists, handleCreateNewPlaylist, deletePlaylist, renamePlaylist} =
-    useContext(MusicContext);
+  const {
+    currentSong,
+    playlists,
+    handleCreateNewPlaylist,
+    deletePlaylist,
+    renamePlaylist,
+  } = useContext(MusicContext);
   const [showCreatePlaylistModal, setShowCreatePlaylistModal] = useState(false);
   const [showMoreModal, setShowMoreModal] = useState(false);
   const [playlistSelected, setPlaylistSelected] = useState(false);
@@ -159,8 +171,11 @@ const Playlists = ({navigation}) => {
           <Text style={styles.playlistHeaderText}>Playlists</Text>
           <Icon name="plus" size={15} onPress={handleCreateNew} />
         </View>
-        {playlists?.length
-          ? playlists.map(playlist => {
+        {Array.isArray(playlists) && (
+          <FlatList
+            {...(currentSong && {contentContainerStyle: {paddingBottom: 50}})}
+            data={playlists}
+            renderItem={({item: playlist, index}) => {
               if (playlist.name === 'AllSongs') {
                 return;
               }
@@ -196,8 +211,10 @@ const Playlists = ({navigation}) => {
                   />
                 </TouchableOpacity>
               );
-            })
-          : null}
+            }}
+            keyExtractor={playlist => playlist.name}
+          />
+        )}
       </View>
     </>
   );

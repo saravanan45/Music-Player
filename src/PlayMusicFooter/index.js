@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     position: 'fixed',
     bottom: 0,
+    backgroundColor: 'white',
   },
   songImage: {
     width: 40,

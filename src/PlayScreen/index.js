@@ -42,7 +42,6 @@ const PlayScreen = ({navigation, route}) => {
 
   useEffect(() => {
     return () => {
-      console.log('cleared');
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
@@ -73,7 +72,6 @@ const PlayScreen = ({navigation, route}) => {
           currPlayState === 'playing'
         ) {
           musicInstance.current.getCurrentTime(secs => {
-            //console.log('timer', secs);
             setCurrTimer(secs);
           });
         }
@@ -111,8 +109,6 @@ const PlayScreen = ({navigation, route}) => {
 
   const currentTimeString = getAudioTimeString(currTimer);
   const durationString = getAudioTimeString(currSongDuration);
-
-  console.log('currentTimeString: ' + currentTimeString, currTimer);
 
   return (
     <View style={styles.playScreenContainer}>
